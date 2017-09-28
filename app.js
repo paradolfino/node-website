@@ -5,6 +5,8 @@ var express = require('express')
   , stylus = require('stylus')
   , nib = require('nib')
 var app = express()
+var port = 3000
+
 function compile(str, path) {
   return stylus(str)
     .set('filename', path)
@@ -20,3 +22,15 @@ app.use(stylus.middleware(//ext, the Stylus middleware is applied, which will co
   }
 ))
 app.use(express.static(__dirname + '/public'))//After that it's the Express static middleware, which is used for serving static files (we tell it that our static files will live in a folder called 'public'
+
+
+//express routes
+app.get('/', function (req, res) {
+	console.log("Requesting")
+	res.send('Hello World')
+	console.log("Request Received")
+
+  
+})
+app.listen(port)
+console.log("Server Started on: " + port)
